@@ -1,0 +1,20 @@
+#! /bin/sh
+
+case "`uname -s`" in
+	Darwin )
+		bin=bin-macos ;;
+	Linux )
+		case "`uname -m`" in
+			x86_64 )
+				bin=bin-linux-amd64 ;;
+			* )
+				echo "Unsupported architecture" >&2
+				exit 126 ;;
+		esac ;;
+	* )
+		echo "Unsupported system" >&2
+		exit 126 ;;
+esac
+
+dir=~/"works/Commands/Compiler Flags"
+PATH="$dir:$PATH" exec $bin "$@"
